@@ -150,6 +150,9 @@ class ComposerHFCausalLM(HuggingFaceModelWithZLoss):
                     f'init_device="{init_device}" must be either "cpu" or "meta".'
                 )
 
+            # Resize the token embeddings
+            model.resize_token_embeddings(len(tokenizer))
+
             signal_file_path = '.local_rank0_completed_autoresume'
             if dist.get_local_rank() == 0:
                 with open(signal_file_path, 'wb') as f:
