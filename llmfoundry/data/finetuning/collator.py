@@ -222,6 +222,7 @@ class Seq2SeqFinetuningCollator:
         batch = self.tokenizer.pad(
             processed_examples,
             padding='max_length',
+            truncation=True,
             max_length=self.max_seq_len,
             return_tensors='pt',
         )
